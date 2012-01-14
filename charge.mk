@@ -61,8 +61,7 @@ PRODUCT_PACKAGES := \
 # update utilities
 PRODUCT_PACKAGES += \
     make_ext4fs \
-    bootmenu_busybox \
-    bmlwrite
+    bootmenu_busybox
 
 # These are the OpenMAX IL configuration files
 PRODUCT_COPY_FILES += \
