@@ -22,19 +22,6 @@ loglevel 9
     chown radio radio /mnt/radio
     chown radio radio /mnt/radio/lte_traffic
     chown radio radio /mnt/radio/3g_traffic
-    
-    insmod /lib/modules/fsr.ko
-    insmod /lib/modules/fsr_stl.ko
-    insmod /lib/modules/rfs_glue.ko
-    insmod /lib/modules/rfs_fat.ko
-    insmod /lib/modules/j4fs.ko
-    insmod /lib/modules/storage.ko
-
-    mkdir /mnt/.lfs 0755 root root
-    mount j4fs /dev/block/stl7 /mnt/.lfs
-    insmod /lib/modules/param.ko
-
-    insmod /lib/modules/Si4709_driver.ko
 
     # ko files for vibrator
     insmod /lib/modules/vibrator.ko
@@ -66,19 +53,14 @@ on boot
     setprop ro.telephony.call_ring.multiple 0
 
 on fs
-
-    #mount rfs /dev/block/stl10 /system ro check=no
-    mount ext4 /dev/block/stl10 /system
-
+    mount yaffs2 mtd@system /system
     mkdir /data
-    #mount rfs /dev/block/mmcblk0p1 /data nosuid nodev check=no
     mount ext4 /dev/block/mmcblk0p1 /data wait nosuid noatime nodiratime noauto_da_alloc
     chown system system /data
     chmod 0771 /data
     
-    #mount rfs /dev/block/mmcblk0p3 /cache nosuid nodev check=no    
     mount ext4 /dev/block/mmcblk0p3 /cache wait nosuid noatime nodiratime noauto_da_alloc
-    mount rfs /dev/block/stl3 /efs nosuid nodev check=no
+    mount yaffs2 mtd@etf /efs
 
     #chown system system /efs
     chown radio radio /efs
@@ -107,7 +89,6 @@ on post-fs
 	insmod /lib/modules/svnet.ko
 	insmod /lib/modules/modemctl.ko
 	insmod /lib/modules/dpram.ko
-	insmod /lib/modules/nvstorage.ko
 
 # DivX DRM	
     mkdir /efs/.files 0775

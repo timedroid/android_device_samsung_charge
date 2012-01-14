@@ -25,13 +25,6 @@ PRODUCT_COPY_FILES := \
     device/samsung/charge/ueventd.rc:root/ueventd.rc \
     device/samsung/charge/lpm.rc:root/lpm.rc
 
-# kernel modules for ramdisk
-PRODUCT_COPY_FILES += \
-    $(call find-copy-subdir-files,*,device/samsung/charge/modules,root/lib/modules)
-
-PRODUCT_COPY_FILES += \
-    $(call find-copy-subdir-files,*,device/samsung/charge/modules,recovery/root/lib/modules)
-
 # egl
 PRODUCT_COPY_FILES += \
     device/samsung/charge/prebuilt/lib/egl/egl.cfg:system/lib/egl/egl.cfg
