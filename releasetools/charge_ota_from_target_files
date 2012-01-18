@@ -39,12 +39,15 @@ __doc__ = ota_from_target_files.__doc__
 def CopyBootFiles(input_zip, output_zip):
     output_zip.write(os.path.join(TARGET_DIR, "boot.img"),"boot.img")
 
-def CopyUpdaterFiles(output_zip):
-  """Copy some utilities needed for updater."""
+def CopyBMLoverMTD(output_zip):
+  """Copy the bml_over_mtd utility and script to the output."""
   output_zip.write(os.path.join(UTILITIES_DIR, "make_ext4fs"),"make_ext4fs")
   output_zip.write(os.path.join(UTILITIES_DIR, "busybox"),"busybox")
-  output_zip.write(os.path.join(LOCAL_DIR, "updater.sh"),"updater.sh")
-  output_zip.write(os.path.join(UTILITIES_DIR, "bmlwrite"),"bmlwrite")
+  output_zip.write(os.path.join(UTILITIES_DIR, "flash_image"),"flash_image")
+  output_zip.write(os.path.join(UTILITIES_DIR, "erase_image"),"erase_image")
+  output_zip.write(os.path.join(UTILITIES_DIR, "bml_over_mtd"),"bml_over_mtd")
+  output_zip.write(os.path.join(LOCAL_DIR, "bml_over_mtd.sh"),"bml_over_mtd.sh")
+  output_zip.write(os.path.join(TARGET_DIR, "updater.sh"),"updater.sh")
 
 def WriteFullOTAPackage(input_zip, output_zip):
   # TODO: how to determine this?  We don't know what version it will
@@ -68,6 +71,8 @@ def WriteFullOTAPackage(input_zip, output_zip):
 
   AppendAssertions(script, input_zip)
   device_specific.FullOTA_Assertions()
+  if OPTIONS.backuptool:
+    script.RunBackup("backup")
 
   script.ShowProgress(0.5, 0)
 
@@ -82,13 +87,25 @@ def WriteFullOTAPackage(input_zip, output_zip):
   (symlinks, retouch_files) = CopySystemFiles(input_zip, output_zip)
   script.MakeSymlinks(symlinks)
 
-  CopyBootFiles(input_zip, output_zip)
-  CopyUpdaterFiles(output_zip)
-
   Item.GetMetadata(input_zip)
   Item.Get("system").SetPermissions(script)
 
   script.ShowProgress(0.2, 0)
+
+  if OPTIONS.backuptool:
+    script.ShowProgress(0.2, 10)
+    script.RunBackup("restore")
+
+  script.RunModelidCfg()
+
+  script.RunVerifyCachePartitionSize()
+
+  CopyBootFiles(input_zip, output_zip)
+  CopyBMLoverMTD(output_zip)
+
+  script.ShowProgress(0.2, 10)
+  script.WriteBMLoverMTD("boot", "72", "reservoir", "2004", "boot.img")
+
   script.ShowProgress(0.1, 0)
   device_specific.FullOTA_InstallEnd()
 
@@ -105,6 +122,7 @@ def WriteIncrementalOTAPackage(target_zip, source_zip, output_zip):
     print "Incremental OTA Packages are not supported on the Charge at this time"
     sys.exit(1)
 ota_from_target_files.WriteIncrementalOTAPackage = WriteIncrementalOTAPackage
+
 
 if __name__ == '__main__':
   try:
