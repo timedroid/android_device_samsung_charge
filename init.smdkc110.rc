@@ -60,9 +60,8 @@ on fs
     chmod 0771 /data
     
     mount ext4 /dev/block/mmcblk0p3 /cache wait nosuid noatime nodiratime noauto_da_alloc
-    mount yaffs2 mtd@etf /efs
 
-    #chown system system /efs
+    symlink /data/efs /efs
     chown radio radio /efs
     chmod 0771 /efs
 
@@ -335,6 +334,9 @@ on post-fs-data
 
 # Run sysinit
     exec /system/bin/sysinit
+
+# Run modem setup
+    exec /sbin/setup_modem.sh
 
 on property:ro.debuggable=1
     start adbd

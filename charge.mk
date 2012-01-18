@@ -23,7 +23,9 @@ DEVICE_PACKAGE_OVERLAYS := device/samsung/charge/overlay
 PRODUCT_COPY_FILES := \
     device/samsung/charge/init.smdkc110.rc:root/init.smdkc110.rc \
     device/samsung/charge/ueventd.rc:root/ueventd.rc \
-    device/samsung/charge/lpm.rc:root/lpm.rc
+    device/samsung/charge/lpm.rc:root/lpm.rc \
+    device/samsung/charge/setup_modem.sh:root/sbin/setup_modem.sh \
+    $(UTILITIES_DIR)/bml_over_mtd:root/sbin/bml_over_mtd.sh
 
 # egl
 PRODUCT_COPY_FILES += \
@@ -61,7 +63,8 @@ PRODUCT_PACKAGES := \
 # update utilities
 PRODUCT_PACKAGES += \
     make_ext4fs \
-    bootmenu_busybox
+    bootmenu_busybox \
+    bml_over_mtd
 
 # These are the OpenMAX IL configuration files
 PRODUCT_COPY_FILES += \
