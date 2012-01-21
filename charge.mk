@@ -164,7 +164,9 @@ PRODUCT_COPY_FILES += \
 
 # install wifi driver
 PRODUCT_COPY_FILES += \
-    device/samsung/charge/bcm4329.ko:system/lib/modules/bcm4329.ko
+    device/samsung/charge/bcm4329.ko:system/lib/modules/bcm4329.ko \
+    device/samsung/charge/nvram_net.txt:system/etc/wifi/nvram_net.txt \
+    device/samsung/charge/nvram_mfg.txt:system/etc/wifi/nvram_mfg.txt
 
 # copy the filesystem converter
 PRODUCT_COPY_FILES += \

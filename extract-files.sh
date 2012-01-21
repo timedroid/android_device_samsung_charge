@@ -14,6 +14,10 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# Assumes you're pulling from a previous CM build.
+# Will use proprietary GPS and GFX files from crespo downloaded from
+# http://code.google.com/android/nexus/drivers.html
+
 DEVICE=charge
 
 rm -rf ../../../vendor/samsung/$DEVICE/*
@@ -50,8 +54,6 @@ for DIR in $DIRS; do
 done
 
 FILES="
-vendor/firmware/nvram_net.txt
-
 bin/pppd_runner
 bin/rild
 etc/cellcache.db
@@ -88,7 +90,7 @@ vendor/lib/libusc.so
 bin/geomagneticd
 bin/orientationd
 lib/libsensor_yamaha_test.so
-lib/hw/sensors.s5pc110.so
+lib/hw/sensors.default.so
 
 lib/hw/lights.s5pc110.so
 vendor/lib/hw/gralloc.s5pc110.so
@@ -176,38 +178,9 @@ PRODUCT_COPY_FILES += \\
     vendor/samsung/__DEVICE__/proprietary/lib/libsec-ril40.so:obj/lib/libsec-ril40.so \\
     vendor/samsung/__DEVICE__/proprietary/lib/libsec-ril40-cdma.so:obj/lib/libsec-ril40-cdma.so
 
-# gfx
+# gfx-common
 PRODUCT_COPY_FILES += \\
-    vendor/samsung/__DEVICE__/proprietary/bin/pvrsrvinit:system/bin/pvrsrvinit \\
-    vendor/samsung/__DEVICE__/proprietary/lib/egl/libGLES_android.so:system/lib/egl/libGLES_android.so \\
-    vendor/samsung/__DEVICE__/proprietary/vendor/lib/egl/libEGL_POWERVR_SGX540_120.so:system/vendor/lib/egl/libEGL_POWERVR_SGX540_120.so \\
-    vendor/samsung/__DEVICE__/proprietary/vendor/lib/egl/libGLESv1_CM_POWERVR_SGX540_120.so:system/vendor/lib/egl/libGLESv1_CM_POWERVR_SGX540_120.so \\
-    vendor/samsung/__DEVICE__/proprietary/vendor/lib/egl/libGLESv2_POWERVR_SGX540_120.so:system/vendor/lib/egl/libGLESv2_POWERVR_SGX540_120.so \\
-    vendor/samsung/__DEVICE__/proprietary/vendor/lib/hw/gralloc.s5pc110.so:system/vendor/lib/hw/gralloc.s5pc110.so \\
-    vendor/samsung/__DEVICE__/proprietary/vendor/lib/libglslcompiler.so:system/vendor/lib/libglslcompiler.so \\
-    vendor/samsung/__DEVICE__/proprietary/vendor/lib/libIMGegl.so:system/vendor/lib/libIMGegl.so \\
-    vendor/samsung/__DEVICE__/proprietary/vendor/lib/libpvr2d.so:system/vendor/lib/libpvr2d.so \\
-    vendor/samsung/__DEVICE__/proprietary/vendor/lib/libpvrANDROID_WSEGL.so:system/vendor/lib/libpvrANDROID_WSEGL.so \\
-    vendor/samsung/__DEVICE__/proprietary/vendor/lib/libPVRScopeServices.so:system/vendor/lib/libPVRScopeServices.so \\
-    vendor/samsung/__DEVICE__/proprietary/vendor/lib/libsrv_init.so:system/vendor/lib/libsrv_init.so \\
-    vendor/samsung/__DEVICE__/proprietary/vendor/lib/libsrv_um.so:system/vendor/lib/libsrv_um.so \\
-    vendor/samsung/__DEVICE__/proprietary/vendor/lib/libusc.so:system/vendor/lib/libusc.so
-
-#
-# Wifi
-#
-PRODUCT_COPY_FILES += \\
-    vendor/samsung/__DEVICE__/proprietary/vendor/firmware/nvram_net.txt:system/vendor/firmware/nvram_net.txt
-
-#
-# Sensors, Lights etc
-#
-PRODUCT_COPY_FILES += \\
-    vendor/samsung/__DEVICE__/proprietary/bin/geomagneticd:system/bin/geomagneticd \\
-    vendor/samsung/__DEVICE__/proprietary/bin/orientationd:system/bin/orientationd \\
-    vendor/samsung/__DEVICE__/proprietary/lib/hw/sensors.s5pc110.so:system/lib/hw/sensors.s5pc110.so \\
-    vendor/samsung/__DEVICE__/proprietary/lib/libsensor_yamaha_test.so:system/lib/libsensor_yamaha_test.so \\
-    vendor/samsung/__DEVICE__/proprietary/lib/hw/lights.s5pc110.so:system/lib/hw/lights.s5pc110.so
+    vendor/samsung/__DEVICE__/proprietary/lib/egl/libGLES_android.so:system/lib/egl/libGLES_android.so
 
 #
 # RIL
@@ -233,12 +206,16 @@ PRODUCT_COPY_FILES += \\
     vendor/samsung/__DEVICE__/proprietary/lib/libwlwpscli.so:system/lib/libwlwpscli.so \\
     vendor/samsung/__DEVICE__/proprietary/lib/libwlwps.so:system/lib/libwlwps.so
 
+
 #
-# GPS
+# Sensors, Lights etc
 #
 PRODUCT_COPY_FILES += \\
-    vendor/samsung/__DEVICE__/proprietary/bin/gpsd:system/bin/gpsd \\
-    vendor/samsung/__DEVICE__/proprietary/lib/hw/gps.s5pc110.so:system/lib/hw/gps.s5pc110.so
+    vendor/samsung/__DEVICE__/proprietary/bin/geomagneticd:system/bin/geomagneticd \\
+    vendor/samsung/__DEVICE__/proprietary/bin/orientationd:system/bin/orientationd \\
+    vendor/samsung/__DEVICE__/proprietary/lib/hw/sensors.default.so:system/lib/hw/sensors.default.so \\
+    vendor/samsung/__DEVICE__/proprietary/lib/libsensor_yamaha_test.so:system/lib/libsensor_yamaha_test.so \\
+    vendor/samsung/__DEVICE__/proprietary/lib/hw/lights.s5pc110.so:system/lib/hw/lights.s5pc110.so
 
 #
 # bluetooth
@@ -296,7 +273,49 @@ PRODUCT_COPY_FILES += \\
     vendor/samsung/__DEVICE__/proprietary/media/chargingwarning.qmg:system/media/chargingwarning.qmg \\
     vendor/samsung/__DEVICE__/proprietary/media/chargingwarning_auth.qmg:system/media/chargingwarning_auth.qmg
 
+EOF
+
+if [ -e ../../../vendor/imgtec/crespo/device-crespo.mk ]
+then
+	echo "Using crespo proprietary gfx files"
+	echo '$(call inherit-product, vendor/imgtec/crespo/device-crespo.mk' >> ../../../vendor/samsung/$DEVICE/$DEVICE-vendor-blobs.mk
+else
+	echo "Using previous proprietary gfx files"
+	(cat << EOF) | sed s/__DEVICE__/$DEVICE/g >> ../../../vendor/samsung/$DEVICE/$DEVICE-vendor-blobs.mk
+# gfx-common
+PRODUCT_COPY_FILES += \\
+    vendor/samsung/__DEVICE__/proprietary/lib/egl/libGLES_android.so:system/lib/egl/libGLES_android.so
+    vendor/samsung/__DEVICE__/proprietary/bin/pvrsrvinit:system/bin/pvrsrvinit \\
+    vendor/samsung/__DEVICE__/proprietary/vendor/lib/egl/libEGL_POWERVR_SGX540_120.so:system/vendor/lib/egl/libEGL_POWERVR_SGX540_120.so \\
+    vendor/samsung/__DEVICE__/proprietary/vendor/lib/egl/libGLESv1_CM_POWERVR_SGX540_120.so:system/vendor/lib/egl/libGLESv1_CM_POWERVR_SGX540_120.so \\
+    vendor/samsung/__DEVICE__/proprietary/vendor/lib/egl/libGLESv2_POWERVR_SGX540_120.so:system/vendor/lib/egl/libGLESv2_POWERVR_SGX540_120.so \\
+    vendor/samsung/__DEVICE__/proprietary/vendor/lib/hw/gralloc.s5pc110.so:system/vendor/lib/hw/gralloc.s5pc110.so \\
+    vendor/samsung/__DEVICE__/proprietary/vendor/lib/libglslcompiler.so:system/vendor/lib/libglslcompiler.so \\
+    vendor/samsung/__DEVICE__/proprietary/vendor/lib/libIMGegl.so:system/vendor/lib/libIMGegl.so \\
+    vendor/samsung/__DEVICE__/proprietary/vendor/lib/libpvr2d.so:system/vendor/lib/libpvr2d.so \\
+    vendor/samsung/__DEVICE__/proprietary/vendor/lib/libpvrANDROID_WSEGL.so:system/vendor/lib/libpvrANDROID_WSEGL.so \\
+    vendor/samsung/__DEVICE__/proprietary/vendor/lib/libPVRScopeServices.so:system/vendor/lib/libPVRScopeServices.so \\
+    vendor/samsung/__DEVICE__/proprietary/vendor/lib/libsrv_init.so:system/vendor/lib/libsrv_init.so \\
+    vendor/samsung/__DEVICE__/proprietary/vendor/lib/libsrv_um.so:system/vendor/lib/libsrv_um.so \\
+    vendor/samsung/__DEVICE__/proprietary/vendor/lib/libusc.so:system/vendor/lib/libusc.so
+EOF
+fi
+
+if [ -e ../../../vendor/broadcom/crespo/device-crespo.mk ]
+then
+	echo "Using crespo GPS files"
+	echo '$(call inherit-product, vendor/broadcom/crespo/device-crespo.mk' >> ../../../vendor/samsung/$DEVICE/$DEVICE-vendor-blobs.mk
+else
+	echo "Using previous proprietary GPS files"
+	(cat << EOF) | sed s/__DEVICE__/$DEVICE/g >> ../../../vendor/samsung/$DEVICE/$DEVICE-vendor-blobs.mk
+#
+# GPS
+#
+PRODUCT_COPY_FILES += \\
+    vendor/samsung/__DEVICE__/proprietary/bin/gpsd:system/bin/gpsd \\
+    vendor/samsung/__DEVICE__/proprietary/lib/hw/gps.s5pc110.so:system/lib/hw/gps.s5pc110.so
 
 EOF
+fi
 
 ./setup-makefiles.sh
