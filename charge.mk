@@ -25,7 +25,7 @@ PRODUCT_COPY_FILES := \
     device/samsung/charge/ueventd.rc:root/ueventd.rc \
     device/samsung/charge/lpm.rc:root/lpm.rc \
     device/samsung/charge/setup_modem.sh:root/sbin/setup_modem.sh \
-    $(UTILITIES_DIR)/bml_over_mtd:root/sbin/bml_over_mtd.sh
+    $(UTILITIES_DIR)/bml_over_mtd:root/sbin/bml_over_mtd
 
 # egl
 PRODUCT_COPY_FILES += \
