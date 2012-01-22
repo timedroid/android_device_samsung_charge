@@ -55,6 +55,9 @@ if /tmp/busybox test -e /dev/block/bml7 ; then
     # dump actual efs/nvdata partition
     /tmp/busybox dd if=/dev/block/bml13 of=/mnt/sdcard/backup/efs/nv_data.bin bs=256K
 
+    # dump modem
+    /tmp/busybox dd if=/dev/block/bml12 of=/mnt/sdcard/backup/efs/modem.bin bs=256K
+
     # write the package path to sdcard cyanogenmod.cfg
     if /tmp/busybox test -n "$UPDATE_PACKAGE" ; then
         PACKAGE_LOCATION=${UPDATE_PACKAGE#/mnt}
@@ -152,9 +155,6 @@ elif /tmp/busybox test -e /dev/block/mtdblock0 ; then
         /tmp/busybox echo "Cannot mount data."
         exit 4
     fi
-
-    # dump modem
-    /tmp/bml_over_mtd dump radio 1954 reservoir 2004 /data/modem.bin
 
     # flash boot image to boot
     /tmp/bml_over_mtd.sh boot 84 reservoir 2004 /tmp/boot.img
