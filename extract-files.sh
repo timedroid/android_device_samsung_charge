@@ -278,7 +278,7 @@ EOF
 if [ -e ../../../vendor/imgtec/crespo/device-crespo.mk ]
 then
 	echo "Using crespo proprietary gfx files"
-	echo '$(call inherit-product, vendor/imgtec/crespo/device-crespo.mk' >> ../../../vendor/samsung/$DEVICE/$DEVICE-vendor-blobs.mk
+	echo '$(call inherit-product, vendor/imgtec/crespo/device-crespo.mk)' >> ../../../vendor/samsung/$DEVICE/$DEVICE-vendor-blobs.mk
 else
 	echo "Using previous proprietary gfx files"
 	(cat << EOF) | sed s/__DEVICE__/$DEVICE/g >> ../../../vendor/samsung/$DEVICE/$DEVICE-vendor-blobs.mk
@@ -304,7 +304,7 @@ fi
 if [ -e ../../../vendor/broadcom/crespo/device-crespo.mk ]
 then
 	echo "Using crespo GPS files"
-	echo '$(call inherit-product, vendor/broadcom/crespo/device-crespo.mk' >> ../../../vendor/samsung/$DEVICE/$DEVICE-vendor-blobs.mk
+	echo '$(call inherit-product, vendor/broadcom/crespo/device-crespo.mk)' >> ../../../vendor/samsung/$DEVICE/$DEVICE-vendor-blobs.mk
 else
 	echo "Using previous proprietary GPS files"
 	(cat << EOF) | sed s/__DEVICE__/$DEVICE/g >> ../../../vendor/samsung/$DEVICE/$DEVICE-vendor-blobs.mk
