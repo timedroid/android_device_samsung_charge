@@ -10,10 +10,10 @@ then
 fi
 ln -s /data/modem.bin /dev/block/bml12
 
-if [ ! -e /data/efs/nv_data.bin ]
+if [ ! -e /efs/nv_data.bin ]
 then
-	/sbin/bml_over_mtd dump efs 2002 reservoir 2004 /data/efs/nv_data.bin
+	/sbin/bml_over_mtd dump nvdata 2002 reservoir 2004 /efs/nv_data.bin
 fi
-ln -s /data/efs/nv_data.bin /dev/nvs
+ln -s /efs/nv_data.bin /dev/nvs
 
 mount -o remount,ro /

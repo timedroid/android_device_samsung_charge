@@ -61,7 +61,7 @@ on fs
     
     mount ext4 /dev/block/mmcblk0p3 /cache wait nosuid noatime nodiratime noauto_da_alloc
 
-    symlink /data/efs /efs
+    mount yaffs2 mtd@efs /efs
     chown radio radio /efs
     chmod 0771 /efs
 

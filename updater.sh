@@ -52,7 +52,7 @@ if /tmp/busybox test -e /dev/block/bml7 ; then
     /tmp/busybox mkdir -p /mnt/sdcard/backup/efs
     /tmp/busybox cp -R /efs/ /mnt/sdcard/backup
 
-    # dump actual efs partition
+    # dump actual efs/nvdata partition
     /tmp/busybox dd if=/dev/block/bml13 of=/mnt/sdcard/backup/efs/nv_data.bin bs=256K
 
     # write the package path to sdcard cyanogenmod.cfg
@@ -127,19 +127,30 @@ elif /tmp/busybox test -e /dev/block/mtdblock0 ; then
     /tmp/busybox umount -l /datadata
     /tmp/erase_image datadata
 
+    # restore efs backup
+    if /tmp/busybox test -e /sdcard/backup/efs/nv_data.bin ; then
+        /tmp/busybox umount -l /efs
+        /tmp/erase_image efs
+        /tmp/busybox mkdir -p /efs
+
+        if ! /tmp/busybox grep -q /efs /proc/mounts ; then
+            if ! /tmp/busybox mount -t yaffs2 /dev/block/mtdblock3 /efs ; then
+                /tmp/busybox echo "Cannot mount efs."
+                exit 6
+            fi
+        fi
+
+        /tmp/busybox cp -R /sdcard/backup/efs /
+        /tmp/busybox umount -l /efs
+    else
+        /tmp/busybox echo "Cannot restore efs."
+        exit 7
+    fi
+
     # remount data
     if ! /tmp/busybox mount -t ext4 /dev/block/mmcblk0p1 /data ; then
         /tmp/busybox echo "Cannot mount data."
         exit 4
-    fi
-
-    # restore efs backup
-    if /tmp/busybox test -e /sdcard/backup/efs ; then
-        /tmp/busybox mkdir -p /data/efs
-        /tmp/busybox cp -R /sdcard/backup/efs /data
-    else
-        /tmp/busybox echo "Cannot restore efs."
-        exit 7
     fi
 
     # dump modem
