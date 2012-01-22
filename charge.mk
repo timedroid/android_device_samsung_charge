@@ -63,6 +63,7 @@ PRODUCT_PACKAGES := \
 # update utilities
 PRODUCT_PACKAGES += \
     make_ext4fs \
+    setup_fs \
     bootmenu_busybox \
     bml_over_mtd
 

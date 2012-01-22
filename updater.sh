@@ -156,14 +156,7 @@ elif /tmp/busybox test -e /dev/block/mtdblock0 ; then
         exit 4
     fi
 
-    # flash boot image to boot
-    /tmp/bml_over_mtd.sh boot 84 reservoir 2004 /tmp/boot.img
-
-    # flash boot image to recovery
-    /tmp/bml_over_mtd.sh recovery 114 reservoir 2004 /tmp/boot.img
-
-    # unmount and format data
-    /tmp/busybox umount /data
+    # images will be flashed later in script
 
     exit 0
 fi
