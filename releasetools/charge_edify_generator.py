@@ -35,12 +35,6 @@ class EdifyGenerator(edify_generator.EdifyGenerator):
             ('package_extract_file("busybox", "/tmp/busybox");\n'
              'set_perm(0, 0, 0777, "/tmp/busybox");'))
       self.script.append(
-            ('package_extract_file("flash_image", "/tmp/flash_image");\n'
-             'set_perm(0, 0, 0777, "/tmp/flash_image");'))
-      self.script.append(
-            ('package_extract_file("erase_image", "/tmp/erase_image");\n'
-             'set_perm(0, 0, 0777, "/tmp/erase_image");'))
-      self.script.append(
             ('package_extract_file("bml_over_mtd", "/tmp/bml_over_mtd");\n'
              'set_perm(0, 0, 0777, "/tmp/bml_over_mtd");'))
       self.script.append(
@@ -59,7 +53,7 @@ class EdifyGenerator(edify_generator.EdifyGenerator):
       args = {'partition': partition, 'partition_start_block': partition_start_block, 'reservoirpartition': reservoirpartition, 'reservoir_start_block': reservoir_start_block, 'image': image}
 
       self.script.append(
-            ('assert(run_program("/tmp/erase_image", "%(partition)s"));') % args)
+            ('assert(run_program("erase_image", "%(partition)s"));') % args)
 
       self.script.append(
             ('assert(package_extract_file("%(image)s", "/tmp/%(partition)s.img"),\n'

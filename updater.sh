@@ -68,13 +68,13 @@ if /tmp/busybox test -e /dev/block/bml7 ; then
     /tmp/busybox rm -f /mnt/sdcard/clockworkmod/.settings
 
     # write new kernel to boot partition
-    /tmp/flash_image boot /tmp/boot.img
+    flash_image boot /tmp/boot.img
     if [ "$?" != "0" ] ; then
         exit 3
     fi
 
     # write new kernel to recovery partition
-    /tmp/flash_image recovery /tmp/boot.img
+    flash_image recovery /tmp/boot.img
     if [ "$?" != "0" ] ; then
         exit 3
     fi
@@ -115,7 +115,7 @@ elif /tmp/busybox test -e /dev/block/mtdblock0 ; then
 
     # unmount, format and mount system
     /tmp/busybox umount -l /system
-    /tmp/erase_image system
+    erase_image system
     /tmp/busybox mount -t yaffs2 /dev/block/mtdblock2 /system
 
     # unmount and format cache
@@ -128,12 +128,12 @@ elif /tmp/busybox test -e /dev/block/mtdblock0 ; then
 
     # unmount and format datadata
     /tmp/busybox umount -l /datadata
-    /tmp/erase_image datadata
+    erase_image datadata
 
     # restore efs backup
     if /tmp/busybox test -e /sdcard/backup/efs/nv_data.bin ; then
         /tmp/busybox umount -l /efs
-        /tmp/erase_image efs
+        erase_image efs
         /tmp/busybox mkdir -p /efs
 
         if ! /tmp/busybox grep -q /efs /proc/mounts ; then
