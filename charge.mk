@@ -22,7 +22,6 @@ DEVICE_PACKAGE_OVERLAYS := device/samsung/charge/overlay
 # Init files
 PRODUCT_COPY_FILES := \
     device/samsung/charge/init.smdkc110.rc:root/init.smdkc110.rc \
-    device/samsung/charge/init.smdkc110.rc:root/init.rc \
     device/samsung/charge/ueventd.rc:root/ueventd.rc \
     device/samsung/charge/lpm.rc:root/lpm.rc \
     device/samsung/charge/setup_modem.sh:root/sbin/setup_modem.sh \
