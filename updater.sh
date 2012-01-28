@@ -106,9 +106,9 @@ elif /tmp/busybox test -e /dev/block/mtdblock0 ; then
 
     # if a cyanogenmod.cfg exists, then this is a first time install
     # let's format the volumes and restore efs
-    if ! /tmp/busybox test -e /sdcard/cyanogenmod.cfg ; then
-        exit 0
-    fi
+    #if ! /tmp/busybox test -e /sdcard/cyanogenmod.cfg ; then
+    #    exit 0
+    #fi
 	
     # remove the cyanogenmod.cfg to prevent this from looping
     /tmp/busybox rm -f /sdcard/cyanogenmod.cfg
