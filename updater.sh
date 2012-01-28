@@ -59,10 +59,10 @@ if /tmp/busybox test -e /dev/block/bml7 ; then
     /tmp/busybox dd if=/dev/block/bml12 of=/mnt/sdcard/backup/efs/modem.bin bs=256K
 
     # write the package path to sdcard cyanogenmod.cfg
-    if /tmp/busybox test -n "$UPDATE_PACKAGE" ; then
-        PACKAGE_LOCATION=${UPDATE_PACKAGE#/mnt}
-        /tmp/busybox echo "$PACKAGE_LOCATION" > /mnt/sdcard/cyanogenmod.cfg
-    fi
+    #if /tmp/busybox test -n "$UPDATE_PACKAGE" ; then
+    #    PACKAGE_LOCATION=${UPDATE_PACKAGE#/mnt}
+    #    /tmp/busybox echo "$PACKAGE_LOCATION" > /mnt/sdcard/cyanogenmod.cfg
+    #fi
 
     # Scorch any ROM Manager settings to require the user to reflash recovery
     /tmp/busybox rm -f /mnt/sdcard/clockworkmod/.settings
