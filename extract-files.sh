@@ -74,7 +74,6 @@ bin/gpsd
 lib/hw/gps.s5pc110.so
 
 bin/pvrsrvinit
-lib/egl/libGLES_android.so
 vendor/lib/egl/libEGL_POWERVR_SGX540_120.so
 vendor/lib/egl/libGLESv1_CM_POWERVR_SGX540_120.so
 vendor/lib/egl/libGLESv2_POWERVR_SGX540_120.so
@@ -177,10 +176,6 @@ PRODUCT_COPY_FILES += \\
     vendor/samsung/__DEVICE__/proprietary/lib/libsecril-client.so:obj/lib/libsecrilclient.so \\
     vendor/samsung/__DEVICE__/proprietary/lib/libsec-ril40.so:obj/lib/libsec-ril40.so \\
     vendor/samsung/__DEVICE__/proprietary/lib/libsec-ril40-cdma.so:obj/lib/libsec-ril40-cdma.so
-
-# gfx-common
-PRODUCT_COPY_FILES += \\
-    vendor/samsung/__DEVICE__/proprietary/lib/egl/libGLES_android.so:system/lib/egl/libGLES_android.so
 
 #
 # RIL
