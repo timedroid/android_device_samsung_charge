@@ -48,6 +48,7 @@ vendor/bin
 vendor/firmware
 vendor/lib/egl
 vendor/lib/hw
+vendor/lib/netutils
 "
 
 for DIR in $DIRS; do
@@ -62,6 +63,7 @@ lib/libril.so
 lib/libsec-ril40.so
 lib/libsec-ril40-cdma.so
 lib/libsecril-client.so
+vendor/lib/netutils/libnetutils.so
 
 bin/gpsd
 lib/hw/gps.s5pc110.so
@@ -181,6 +183,12 @@ PRODUCT_COPY_FILES += \\
     vendor/samsung/__DEVICE__/proprietary/lib/libsec-ril40-cdma.so:system/lib/libsec-ril40-cdma.so \\
     vendor/samsung/__DEVICE__/proprietary/lib/libsecril-client.so:system/lib/libsecril-client.so \\
     vendor/samsung/__DEVICE__/proprietary/lib/libril.so:system/lib/libril.so
+
+#
+# samsung crap needed for ril libraries
+#
+PRODUCT_COPY_FILES += \\
+    vendor/samsung/__DEVICE__/proprietary/vendor/lib/netutils/libnetutils.so:system/vendor/lib/netutils/libnetutils.so
 
 #
 # Sensors, Lights etc
