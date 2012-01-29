@@ -44,6 +44,7 @@ etc/wifi
 lib/egl
 lib/hw
 media
+vendor/bin
 vendor/firmware
 vendor/lib/egl
 vendor/lib/hw
@@ -65,7 +66,7 @@ lib/libsecril-client.so
 bin/gpsd
 lib/hw/gps.s5pc110.so
 
-bin/pvrsrvinit
+vendor/bin/pvrsrvinit
 vendor/lib/egl/libEGL_POWERVR_SGX540_120.so
 vendor/lib/egl/libGLESv1_CM_POWERVR_SGX540_120.so
 vendor/lib/egl/libGLESv2_POWERVR_SGX540_120.so
@@ -77,6 +78,7 @@ vendor/lib/libpvrANDROID_WSEGL.so
 vendor/lib/libglslcompiler.so
 vendor/lib/libPVRScopeServices.so
 vendor/lib/libusc.so
+vendor/lib/hw/gralloc.s5pc110.so
 
 bin/geomagneticd
 bin/orientationd
@@ -84,7 +86,6 @@ lib/libsensor_yamaha_test.so
 lib/hw/sensors.default.so
 
 lib/hw/lights.s5pc110.so
-vendor/lib/hw/gralloc.s5pc110.so
 
 bin/BCM4329B1_002.002.023.0746.0818.hcd
 
@@ -258,8 +259,7 @@ else
 	(cat << EOF) | sed s/__DEVICE__/$DEVICE/g >> ../../../vendor/samsung/$DEVICE/$DEVICE-vendor-blobs.mk
 # gfx-common
 PRODUCT_COPY_FILES += \\
-    vendor/samsung/__DEVICE__/proprietary/lib/egl/libGLES_android.so:system/lib/egl/libGLES_android.so
-    vendor/samsung/__DEVICE__/proprietary/bin/pvrsrvinit:system/bin/pvrsrvinit \\
+    vendor/samsung/__DEVICE__/proprietary/vendor/bin/pvrsrvinit:system/vendor/bin/pvrsrvinit \\
     vendor/samsung/__DEVICE__/proprietary/vendor/lib/egl/libEGL_POWERVR_SGX540_120.so:system/vendor/lib/egl/libEGL_POWERVR_SGX540_120.so \\
     vendor/samsung/__DEVICE__/proprietary/vendor/lib/egl/libGLESv1_CM_POWERVR_SGX540_120.so:system/vendor/lib/egl/libGLESv1_CM_POWERVR_SGX540_120.so \\
     vendor/samsung/__DEVICE__/proprietary/vendor/lib/egl/libGLESv2_POWERVR_SGX540_120.so:system/vendor/lib/egl/libGLESv2_POWERVR_SGX540_120.so \\
