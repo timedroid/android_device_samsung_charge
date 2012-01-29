@@ -199,6 +199,13 @@ PRODUCT_COPY_FILES += \\
     vendor/samsung/__DEVICE__/proprietary/bin/BCM4329B1_002.002.023.0746.0818.hcd:system/bin/BCM4329B1_002.002.023.0746.0818.hcd
 
 #
+# GPS
+#
+PRODUCT_COPY_FILES += \\
+    vendor/samsung/__DEVICE__/proprietary/bin/gpsd:system/bin/gpsd \\
+    vendor/samsung/__DEVICE__/proprietary/lib/hw/gps.s5pc110.so:system/lib/hw/gps.s5pc110.so
+
+#
 # Files for battery charging screen
 #
 PRODUCT_COPY_FILES += \\
@@ -272,23 +279,6 @@ PRODUCT_COPY_FILES += \\
     vendor/samsung/__DEVICE__/proprietary/vendor/lib/libsrv_init.so:system/vendor/lib/libsrv_init.so \\
     vendor/samsung/__DEVICE__/proprietary/vendor/lib/libsrv_um.so:system/vendor/lib/libsrv_um.so \\
     vendor/samsung/__DEVICE__/proprietary/vendor/lib/libusc.so:system/vendor/lib/libusc.so
-EOF
-fi
-
-if [ -e ../../../vendor/broadcom/crespo/device-crespo.mk ]
-then
-	echo "Using crespo GPS files"
-	echo '$(call inherit-product, vendor/broadcom/crespo/device-crespo.mk)' >> ../../../vendor/samsung/$DEVICE/$DEVICE-vendor-blobs.mk
-else
-	echo "Using previous proprietary GPS files"
-	(cat << EOF) | sed s/__DEVICE__/$DEVICE/g >> ../../../vendor/samsung/$DEVICE/$DEVICE-vendor-blobs.mk
-#
-# GPS
-#
-PRODUCT_COPY_FILES += \\
-    vendor/samsung/__DEVICE__/proprietary/bin/gpsd:system/bin/gpsd \\
-    vendor/samsung/__DEVICE__/proprietary/lib/hw/gps.s5pc110.so:system/lib/hw/gps.s5pc110.so
-
 EOF
 fi
 
