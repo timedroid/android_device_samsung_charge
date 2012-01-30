@@ -6,6 +6,9 @@ loglevel 9
     mkdir /mnt/sdcard 0000 system system
     symlink /mnt/sdcard /sdcard
 
+    symlink /efs/modem.bin /dev/block/bml12
+    symlink /efs/nv_data.bin /dev/nvs
+
     mkdir /efs 0771 system system
     chown system system /efs
     chmod 0771 /efs
@@ -325,9 +328,6 @@ on post-fs-data
     # wi-fi
     mkdir /data/misc/wifi/sockets 0777 wifi wifi
     mkdir /data/misc/dhcp 0771 dhcp dhcp
-
-# Run modem setup
-    exec /sbin/setup_modem.sh
 
 # to enable wifi
      setprop wifi.interface "eth0"

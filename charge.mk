@@ -24,8 +24,6 @@ PRODUCT_COPY_FILES := \
     device/samsung/charge/init.smdkc110.rc:root/init.smdkc110.rc \
     device/samsung/charge/ueventd.rc:root/ueventd.rc \
     device/samsung/charge/lpm.rc:root/lpm.rc \
-    device/samsung/charge/setup_modem.sh:root/sbin/setup_modem.sh \
-    $(OUT)/utilities/bml_over_mtd:root/sbin/bml_over_mtd \
     device/samsung/charge/gps.conf:system/etc/gps.conf
 # egl
 PRODUCT_COPY_FILES += \

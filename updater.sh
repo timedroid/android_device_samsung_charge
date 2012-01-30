@@ -144,6 +144,16 @@ elif /tmp/busybox test -e /dev/block/mtdblock0 ; then
         fi
 
         /tmp/busybox cp -R /sdcard/backup/efs /
+
+        # make sure we have modem/nvdata
+        if ! /tmp/busybox test -e /efs/nv_data.bin ; then
+            /tmp/bml_over_mtd dump nvdata 2002 reservoir 2004 /efs/nv_data.bin
+        fi
+
+        if ! /tmp/busybox test -e /efs/modem.bin ; then
+            /tmp/bml_over_mtd dump radio 1954 reservoir 2004 /efs/modem.bin
+        fi
+
         /tmp/busybox umount -l /efs
     else
         /tmp/busybox echo "Cannot restore efs."
