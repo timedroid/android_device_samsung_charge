@@ -370,7 +370,7 @@ service hciattach /system/bin/brcm_patchram_plus -d --enable_hci --baudrate 3000
 
 service ril-daemon1 /system/bin/rild -l /system/lib/libsec-ril40.so -s rildext
     class main
-    setenv LD_LIBRARY_PRELOAD /system/vendor/lib/netutils
+    setenv LD_PRELOAD /system/vendor/lib/netutils/libnetutils.so
     socket rildext stream 660 root radio
     socket rild-debug stream 660 radio system
     user root
@@ -378,7 +378,7 @@ service ril-daemon1 /system/bin/rild -l /system/lib/libsec-ril40.so -s rildext
     
 service ril-daemon2  /system/bin/rild -l /system/lib/libsec-ril40-cdma.so -s rild
     class main
-    setenv LD_LIBRARY_PRELOAD /system/vendor/lib/netutils
+    setenv LD_PRELOAD /system/vendor/lib/netutils/libnetutils.so
     socket rild stream 660 root radio
     socket rild-debug stream 660 radio system
     user root
@@ -386,7 +386,7 @@ service ril-daemon2  /system/bin/rild -l /system/lib/libsec-ril40-cdma.so -s ril
 
 service pppd_cdma /system/bin/pppd_runner
    class main
-   setenv LD_LIBRARY_PRELOAD /system/vendor/lib/netutils
+   setenv LD_PRELOAD /system/vendor/lib/netutils/libnetutils.so
    user root
    group radio cache inet misc system
    disabled
