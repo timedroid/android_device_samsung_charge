@@ -1,2 +1,4 @@
 add_lunch_combo full_chargemtd-eng
 add_lunch_combo full_chargemtd-userdebug
+add_lunch_combo cm_chargemtd-eng
+add_lunch_combo cm_chargemtd-userdebug
