@@ -19,14 +19,14 @@
 # not specialized for any geography.
 #
 $(call inherit-product, $(SRC_TARGET_DIR)/product/languages_full.mk)
-$(call inherit-product, device/samsung/charge/charge.mk)
+$(call inherit-product, device/samsung/chargemtd/device.mk)
 $(call inherit-product, $(SRC_TARGET_DIR)/product/full.mk)
 
 # Droid Charge uses high-density artwork where available
 PRODUCT_LOCALES += hdpi
 
-PRODUCT_NAME := full_charge
-PRODUCT_DEVICE := charge
+PRODUCT_NAME := full_chargemtd
+PRODUCT_DEVICE := chargemtd
 PRODUCT_MODEL := SCH-I510
 PRODUCT_BRAND := samsung
 PRODUCT_MANUFACTURER := samsung

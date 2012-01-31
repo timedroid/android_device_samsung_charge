@@ -18,7 +18,7 @@
 # Will use proprietary GPS and GFX files from crespo downloaded from
 # http://code.google.com/android/nexus/drivers.html
 
-DEVICE=charge
+DEVICE=chargemtd
 
 rm -rf ../../../vendor/samsung/$DEVICE/*
 mkdir -p ../../../vendor/samsung/$DEVICE/proprietary

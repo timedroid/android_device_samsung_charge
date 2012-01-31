@@ -17,42 +17,42 @@
 # These is the hardware-specific overlay, which points to the location
 # of hardware-specific resource overrides, typically the frameworks and
 # application settings that are stored in resourced.
-DEVICE_PACKAGE_OVERLAYS := device/samsung/charge/overlay
+DEVICE_PACKAGE_OVERLAYS := device/samsung/chargemtd/overlay
 
 # Init/misc files
 PRODUCT_COPY_FILES := \
-    device/samsung/charge/init.smdkc110.rc:root/init.smdkc110.rc \
-    device/samsung/charge/ueventd.rc:root/ueventd.rc \
-    device/samsung/charge/lpm.rc:root/lpm.rc \
-    device/samsung/charge/gps.conf:system/etc/gps.conf
+    device/samsung/chargemtd/init.smdkc110.rc:root/init.smdkc110.rc \
+    device/samsung/chargemtd/ueventd.rc:root/ueventd.rc \
+    device/samsung/chargemtd/lpm.rc:root/lpm.rc \
+    device/samsung/chargemtd/gps.conf:system/etc/gps.conf
 # egl
 PRODUCT_COPY_FILES += \
-    device/samsung/charge/prebuilt/lib/egl/egl.cfg:system/lib/egl/egl.cfg
+    device/samsung/chargemtd/prebuilt/lib/egl/egl.cfg:system/lib/egl/egl.cfg
 
 # asound.conf
 PRODUCT_COPY_FILES += \
-    device/samsung/charge/prebuilt/etc/asound.conf:system/etc/asound.conf
+    device/samsung/chargemtd/prebuilt/etc/asound.conf:system/etc/asound.conf
 
 # touchscreen
 PRODUCT_COPY_FILES += \
-    device/samsung/charge/prebuilt/usr/idc/qt602240_ts_input.idc:system/usr/idc/qt602240_ts_input.idc
+    device/samsung/chargemtd/prebuilt/usr/idc/qt602240_ts_input.idc:system/usr/idc/qt602240_ts_input.idc
 
 # vold
 PRODUCT_COPY_FILES += \
-    device/samsung/charge/prebuilt/etc/vold.fstab:system/etc/vold.fstab
+    device/samsung/chargemtd/prebuilt/etc/vold.fstab:system/etc/vold.fstab
 
 # apn config
 PRODUCT_COPY_FILES += \
-    device/samsung/charge/prebuilt/etc/apns-conf.xml:system/etc/apns-conf.xml \
-    device/samsung/charge/prebuilt/etc/cdma-carriers-conf.xml:system/etc/cdma-carriers-conf.xml
+    device/samsung/chargemtd/prebuilt/etc/apns-conf.xml:system/etc/apns-conf.xml \
+    device/samsung/chargemtd/prebuilt/etc/cdma-carriers-conf.xml:system/etc/cdma-carriers-conf.xml
 
 # Keylayout / Keychars
 PRODUCT_COPY_FILES += \
-    device/samsung/charge/prebuilt/usr/keylayout/s3c-keypad.kl:system/usr/keylayout/s3c-keypad.kl \
-    device/samsung/charge/prebuilt/usr/keylayout/sec_jack.kl:system/usr/keylayout/sec_jack.kl \
-    device/samsung/charge/prebuilt/usr/keylayout/AVRCP.kl:system/usr/keylayout/AVRCP.kl \
-    device/samsung/charge/prebuilt/usr/keylayout/Broadcom_Bluetooth_HID.kl:system/usr/keylayout/Broadcom_Bluetooth_HID.kl \
-    device/samsung/charge/prebuilt/usr/keylayout/qwerty.kl:system/usr/keylayout/qwerty.kl
+    device/samsung/chargemtd/prebuilt/usr/keylayout/s3c-keypad.kl:system/usr/keylayout/s3c-keypad.kl \
+    device/samsung/chargemtd/prebuilt/usr/keylayout/sec_jack.kl:system/usr/keylayout/sec_jack.kl \
+    device/samsung/chargemtd/prebuilt/usr/keylayout/AVRCP.kl:system/usr/keylayout/AVRCP.kl \
+    device/samsung/chargemtd/prebuilt/usr/keylayout/Broadcom_Bluetooth_HID.kl:system/usr/keylayout/Broadcom_Bluetooth_HID.kl \
+    device/samsung/chargemtd/prebuilt/usr/keylayout/qwerty.kl:system/usr/keylayout/qwerty.kl
 
 # Generated kcm keymaps
 PRODUCT_PACKAGES := \
@@ -67,8 +67,8 @@ PRODUCT_PACKAGES += \
 
 # These are the OpenMAX IL configuration files
 PRODUCT_COPY_FILES += \
-    device/samsung/charge/sec_mm/sec_omx/sec_omx_core/secomxregistry:system/etc/secomxregistry \
-    device/samsung/charge/prebuilt/etc/media_profiles.xml:system/etc/media_profiles.xml
+    device/samsung/chargemtd/sec_mm/sec_omx/sec_omx_core/secomxregistry:system/etc/secomxregistry \
+    device/samsung/chargemtd/prebuilt/etc/media_profiles.xml:system/etc/media_profiles.xml
 
 # These are the OpenMAX IL modules
 PRODUCT_PACKAGES += \
@@ -104,8 +104,8 @@ PRODUCT_COPY_FILES += \
     frameworks/base/data/etc/android.hardware.sensor.gyroscope.xml:system/etc/permissions/android.hardware.sensor.gyroscope.xml \
     frameworks/base/data/etc/android.software.sip.voip.xml:system/etc/permissions/android.software.sip.voip.xml \
     packages/wallpapers/LivePicker/android.software.live_wallpaper.xml:system/etc/permissions/android.software.live_wallpaper.xml \
-    device/samsung/charge/prebuilt/etc/permissions/android.hardware.telephony.ehrpd.xml:system/etc/permissions/android.hardware.telephony.ehrpd.xml \
-    device/samsung/charge/prebuilt/etc/permissions/android.hardware.telephony.lte.xml:system/etc/permissions/android.hardware.telephony.lte.xml
+    device/samsung/chargemtd/prebuilt/etc/permissions/android.hardware.telephony.ehrpd.xml:system/etc/permissions/android.hardware.telephony.ehrpd.xml \
+    device/samsung/chargemtd/prebuilt/etc/permissions/android.hardware.telephony.lte.xml:system/etc/permissions/android.hardware.telephony.lte.xml
 
 # The OpenGL ES API level that is natively supported by this device.
 # This is a 16.16 fixed point number
@@ -153,7 +153,7 @@ PRODUCT_TAGS += dalvik.gc.type-precise
 
 # Kernel
 ifeq ($(TARGET_PREBUILT_KERNEL),)
-    LOCAL_KERNEL := device/samsung/charge/kernel
+    LOCAL_KERNEL := device/samsung/chargemtd/kernel
 else
     LOCAL_KERNEL := $(TARGET_PREBUILT_KERNEL)
 endif
@@ -163,15 +163,15 @@ PRODUCT_COPY_FILES += \
 
 # install wifi driver
 PRODUCT_COPY_FILES += \
-    device/samsung/charge/nvram_net.txt:system/vendor/firmware/nvram_net.txt \
-    device/samsung/charge/nvram_mfg.txt:system/vendor/firmware/nvram_mfg.txt
+    device/samsung/chargemtd/nvram_net.txt:system/vendor/firmware/nvram_net.txt \
+    device/samsung/chargemtd/nvram_mfg.txt:system/vendor/firmware/nvram_mfg.txt
 
 # copy the filesystem converter
 PRODUCT_COPY_FILES += \
-    device/samsung/charge/updater.sh:updater.sh
+    device/samsung/chargemtd/updater.sh:updater.sh
 
 # See comment at the top of this file. This is where the other
 # half of the device-specific product definition file takes care
 # of the aspects that require proprietary drivers that aren't
 # commonly available
-$(call inherit-product-if-exists, vendor/samsung/charge/charge-vendor.mk)
+$(call inherit-product-if-exists, vendor/samsung/chargemtd/charge-vendor.mk)

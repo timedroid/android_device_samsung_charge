@@ -22,7 +22,7 @@
 # against the traditional rules of inheritance).
 
 # inherit from the proprietary version
--include vendor/samsung/charge/BoardConfigVendor.mk
+-include vendor/samsung/chargemtd/BoardConfigVendor.mk
 
 BOARD_UMS_LUNFILE := "/sys/devices/platform/usb_mass_storage/lun1/file"
 TARGET_USE_CUSTOM_LUN_FILE_PATH := "/sys/devices/platform/usb_mass_storage/lun1/file"
@@ -39,7 +39,7 @@ TARGET_NO_BOOTLOADER := true
 TARGET_BOOTLOADER_BOARD_NAME := s5pc110
 
 TARGET_PROVIDES_INIT := true
-TARGET_RECOVERY_INITRC := device/samsung/charge/recovery.rc
+TARGET_RECOVERY_INITRC := device/samsung/chargemtd/recovery.rc
 
 TARGET_BOARD_PLATFORM := s5pc110
 TARGET_BOARD_PLATFORM_GPU := POWERVR_SGX540_120
@@ -58,8 +58,8 @@ BOARD_USES_GENERIC_AUDIO := false
 TARGET_PROVIDES_LIBAUDIO := true
 
 # Releasetools
-TARGET_RELEASETOOL_OTA_FROM_TARGET_SCRIPT := ./device/samsung/charge/releasetools/charge_ota_from_target_files
-TARGET_RELEASETOOL_IMG_FROM_TARGET_SCRIPT := ./device/samsung/charge/releasetools/charge_img_from_target_files
+TARGET_RELEASETOOL_OTA_FROM_TARGET_SCRIPT := ./device/samsung/chargemtd/releasetools/charge_ota_from_target_files
+TARGET_RELEASETOOL_IMG_FROM_TARGET_SCRIPT := ./device/samsung/chargemtd/releasetools/charge_img_from_target_files
 
 # WiFi related defines
 BOARD_WPA_SUPPLICANT_DRIVER := WEXT
@@ -88,7 +88,7 @@ BRCM_BT_USE_BTL_IF := true
 WITH_A2DP := true
 
 # egl shit
-BOARD_EGL_CFG := device/samsung/charge/prebuilt/lib/egl/egl.cfg
+BOARD_EGL_CFG := device/samsung/chargemtd/prebuilt/lib/egl/egl.cfg
 USE_OPENGL_RENDERER := true
 BOARD_USE_SKIA_LCDTEXT := true
 #COMMON_GLOBAL_CFLAGS += -DMISSING_EGL_EXTERNAL_IMAGE
@@ -97,7 +97,7 @@ BOARD_USE_SKIA_LCDTEXT := true
 
 # Device related defines
 
-TARGET_PREBUILT_KERNEL := device/samsung/charge/kernel
+TARGET_PREBUILT_KERNEL := device/samsung/chargemtd/kernel
 BOARD_KERNEL_CMDLINE := no_console_suspend=1 console=null
 BOARD_KERNEL_BASE := 0x02e00000
 
@@ -111,8 +111,8 @@ BOARD_FLASH_BLOCK_SIZE := 4096
 
 # Kernel/recovery devices
 TARGET_USERIMAGES_USE_EXT4 := true
-BOARD_CUSTOM_GRAPHICS := ../../../device/samsung/charge/recovery/graphics.c
-BOARD_CUSTOM_BOOTIMG_MK := device/samsung/charge/shbootimg.mk
+BOARD_CUSTOM_GRAPHICS := ../../../device/samsung/chargemtd/recovery/graphics.c
+BOARD_CUSTOM_BOOTIMG_MK := device/samsung/chargemtd/shbootimg.mk
 TARGET_RECOVERY_PRE_COMMAND := "echo 1 > /cache/.startrecovery; sync;"
 
-TARGET_OTA_ASSERT_DEVICE := charge,SCH-I510
+TARGET_OTA_ASSERT_DEVICE := charge,chargemtd,SCH-I510

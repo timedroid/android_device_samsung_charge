@@ -1,1 +1,2 @@
-add_lunch_combo full_charge-userdebug
+add_lunch_combo full_chargemtd-eng
+add_lunch_combo full_chargemtd-userdebug
